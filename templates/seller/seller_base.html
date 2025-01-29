@@ -20,6 +20,16 @@
   <link rel="stylesheet" href=" {% static 'css/vertical-layout-light/style.css' %} ">
   <!-- endinject -->
   <link rel="shortcut icon" href=" {% static 'images/favicon.png' %} " />
+
+  <style>
+    .custom-row-border {
+  border: 2px solid #461f65; /* Black border */
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+
+  </style>
 </head>
 <body>
   <div class="container-scroller">
@@ -295,6 +305,8 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+          <li class="nav-item">{{request.user}}
+          </li>
           <li class="nav-item">
             <a class="nav-link" href=" {% static 'index.html' %} ">
               <i class="icon-grid menu-icon"></i>
@@ -302,11 +314,11 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href=" {% static '#ui-basic' %} " aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">UI Elements</span>
-              <i class="menu-arrow"></i>
+            <a class="nav-link" href=" {% url 'product_details' %} ">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Product</span>
             </a>
+
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href=" {% static 'pages/ui-features/buttons.html' %} ">Buttons</a></li>
@@ -316,9 +328,9 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href=" {% static '#form-elements' %} " aria-expanded="false" aria-controls="form-elements">
+            <a class="nav-link" data-toggle="collapse" href=" {% url 'seller_details' %} " aria-expanded="false" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Form elements</span>
+              <span class="menu-title">seller_details</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
@@ -397,6 +409,8 @@
           </li>
         </ul>
       </nav>
+      {% block content %}
+      {% endblock %}
 
 <!--       partial-->
 <!--      <div class="main-panel">-->

@@ -21,3 +21,17 @@ class seller(models.Model):
     email = models.EmailField()
     gst_no = models.IntegerField()
     product_category = models.CharField()
+
+class product(models.Model):
+    product_user = models.ForeignKey("seller",on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    brand = models.CharField(max_length=20)
+    quantity = models.IntegerField()
+    product_description = models.CharField(max_length=400)
+    product_price = models.CharField(max_length=4)
+    product_image = models.FileField(upload_to="images/")
+
+class cart(models.Model):
+    product_data = models.ForeignKey("product",on_delete=models.DO_NOTHING)
+    customer_data = models.ForeignKey("customer",on_delete=models.DO_NOTHING)
+

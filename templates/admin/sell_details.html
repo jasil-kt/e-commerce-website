@@ -1,0 +1,32 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block content %}
+
+ <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">S.NO</th>
+      <th scope="col">NAME</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">GST_NO</th>
+      <th scope="col">PRODUCT_CATEGORY</th>
+    </tr>
+  </thead>
+  <tbody>
+
+      {% for seller in data %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{seller.name}}</td>
+      <td>{{seller.email}}</td>
+      <td>{{seller.gst_no}}</td>
+      <td>{{seller.product_category}}</td>
+         <td><a class="btn btn-primary" href="{% url 'update_customer' seller.id %}" role="button">Edit</a></td>
+       <td><a class="btn btn-primary" href="{% url 'delete_seller' seller.id %}" role="button">Delete</a></td>
+
+    </tr>
+   {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

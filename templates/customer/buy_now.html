@@ -1,0 +1,48 @@
+{% extends 'customer/customer_base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+  <div class="row">
+
+
+
+
+<div class="col-md-4">
+  <div class="row custom-row-border">
+
+
+<div class="card" style="width: 16rem;">
+  <img  src="{{data.product_data.product_image.url}}" alt="Product Image" style="width: 300px; height: 180px;" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h4 class="card-title">{{data.product_data.name}}</h4>
+    <h6 class="card-title">{{data.product_data.brand}}</h6>
+     <p class="card-text">{{data.product_data.quantity}}</p>
+    <p class="card-text">{{data.product_data.product_description }}</p>
+    <p class="card-text">{{data.product_data.product_price}}</p>
+
+
+
+
+  </div>
+
+  <div class="card-body">
+    <a class="btn btn-primary" href="#" role="button">Continue</a>
+
+
+  </div>
+</div>
+</div>
+  </div>
+     {% if forloop.counter|divisibleby:3 and not forloop.last %}
+        </div>
+    <div class="row">
+      {% endif %}
+
+
+
+ </div>
+  </div>
+
+{% endblock %}

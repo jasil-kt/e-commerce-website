@@ -1,0 +1,44 @@
+ {% extends 'admin/admin_base.html' %}
+{% block search %}
+    <form method="get" class="form-inline search-form">
+        <div class="d-none d-md-flex ms-4">
+
+            {{ seller_filter.form }}
+            <br>
+            <button class="btn btn-primary mr-2" type="submit">Search</button>
+        </div>
+              </form>
+   {% endblock %}
+{% block content %}
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">S.NO</th>
+      <th scope="col">NAME</th>
+      <th scope="col">SELLER</th>
+      <th scope="col">BRAND</th>
+      <th scope="col">QUANTITY</th>
+      <th scope="col">DESCRIPTION</th>
+        <th scope="col">PRICE</th>
+        <th scope="col">IMAGE</th>
+    </tr>
+  </thead>
+  <tbody>
+
+      {% for product in data %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{product.name}}</td>
+      <td>{{product.product_user.name}}</td>
+      <td>{{product.brand}}</td>
+      <td>{{product.quantity}}</td>
+      <td>{{product.product_description}}</td>
+        <td>{{product.product_price}}</td>
+        <td><img src="{{product.product_image.url}}" alt="Product Image" style="width: 150px; height: 150px;"></td>
+
+    </tr>
+   {% endfor %}
+  </tbody>
+</table>
+ {% endblock %}

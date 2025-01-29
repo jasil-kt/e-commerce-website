@@ -1,5 +1,6 @@
 {% extends 'login.html' %}
-{%load crispy_forms_tags %}
+
+{% load crispy_forms_tags %}
 {% block content %}
         <form method = 'POST'>
               {% csrf_token %}

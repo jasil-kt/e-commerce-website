@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate,login
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
@@ -11,7 +11,7 @@ def index(request):
 
 
 def dashboard(request):
-    return render(request,'dashboard.html')
+    return render(request,'admin_base.html')
 
 
 
@@ -28,22 +28,23 @@ def log_form(request):
     return render(request,"login_form.html",{"form1":form1})
 
 def seller_login(request):
-    form1 = login_form
-    form2 = seller_form
+    login_form1 = login_form()
+    seller_form1= seller_form()
     if request.method == 'POST':
-        form1 = login_form(request.POST)
-        form2 = seller_form(request.POST)
+        seller_form1 = seller_form(request.POST)
+        login_form1 = login_form(request.POST)
 
-        if form2.is_valid() and form1.is_valid():
-            seller1 =form1.save(commit=False)
+        if seller_form1.is_valid() and login_form1.is_valid():
+            seller1 = login_form1.save(commit=False)
             seller1.is_seller = True
             seller1.save()
 
-            user = form1.save(commit=False)
+            user = seller_form1.save(commit=False)
             user. seller_data = seller1
             user.save()
+            print(user)
             return redirect('seller_login')
-    return render(request,"seller/seller_form.html",{"form1":form1,"form2":form2})
+    return render(request,"seller/seller_form.html",{'seller_form':seller_form1,'login_form':login_form1 })
 
 # def customer(request):
 #     form1 = login_form
@@ -71,29 +72,39 @@ def customer_add(request):
     return render(request,'customer/register.html',{'customer_form':customer_form1,'login_form':login_form1 })
 
 def admin_dashboard(request):
-    return render(request,'admin/admin_dashboard.html')
+    return render(request,'admin/admin_base.html')
 
 def customer_dashboard(request):
-    return render(request,'customer/customer_dashboard.html')
+    return render(request,'customer/customer_base.html')
 
 def seller_dashboard(request):
-    return render(request,'seller/seller_dashboard.html')
+    return render(request,'seller/seller_base.html')
 
 
 def login_view(request):
     if request.method =='POST':
-        username = request.POST.get('uname')
-        password = request.POST.get('pass')
+        username = request.POST.get('username')
+        print(username)
+        password = request.POST.get('password1')
+        print(password)
         user = authenticate(request,username=username,password=password)
+        print(user)
+
         if user is not None:
             login(request,user)
             if user.is_staff:
+                print("staff")
                 return redirect('admin_dashboard')
             elif user.is_customer:
+                print("cus")
+
                 return redirect('customer_dashboard')
             elif user.is_seller:
+                print("user")
+
                 return redirect('seller_dashboard')
         else:
              messages.info(request,'Invalid Credentials')
-    return render(request,'login_form.html',{'login_form':login_form})
+    return render(request,'login1.html')
+
 

@@ -1,0 +1,83 @@
+{% extends 'customer/customer_base.html' %}
+
+
+    {% block search %}
+    <form method="get" class="form-inline search-form">
+        <div class="d-none d-md-flex ms-4">
+
+            {{ brand_filter.form }}
+            <br>
+            <button class="btn btn-primary mr-2" type="submit">Search</button>
+        </div>
+              </form>
+   {% endblock %}
+{% block content %}
+<div class="container">
+
+
+    {% for message in messages %}
+        <div class="alert alert-primary" role="alert" id = "flash-message" >
+            {{ message }}
+        </div>
+      {% endfor %}
+
+
+
+
+
+  <div class="row">
+
+
+
+
+ {% for product in data %}
+<div class="col-md-4">
+  <div class="row custom-row-border">
+
+
+<div class="card" style="width: 16rem;">
+  <img  src="{{product.product_image.url}}" alt="Product Image" style="width: 300px; height: 180px;" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h4 class="card-title">{{product.name}}</h4>
+    <h6 class="card-title">{{product.brand}}</h6>
+     <p class="card-text">{{product.quantity}}</p>
+    <p class="card-text">{{product.product_description}}</p>
+    <p class="card-text">{{product.product_price}}</p>
+
+
+  </div>
+
+  <div class="card-body">
+      <a class="btn btn-primary" href="{% url 'buy_now' product.id %}" role="button">Buy Now</a>
+      <a class="btn btn-primary" href="{% url 'add_cart' product.id %}" role="button">Remove</a>
+  </div>
+</div>
+</div>
+  </div>
+     {% if forloop.counter|divisibleby:3 %}
+        </div><div class="row">
+      {% endif %}
+
+{% endfor %}
+
+ </div>
+  </div>
+
+
+
+
+<script>
+    // Select all alert messages
+    const alerts = document.querySelectorAll('#flash-message');
+
+    // Set a timeout to remove each alert after 5 seconds
+    alerts.forEach(alert => {
+        setTimeout(() => {
+            alert.style.display = 'none';
+        }, 3000); // 3seconds
+    });
+</script>
+
+{% endblock %}
+
+
