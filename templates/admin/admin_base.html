@@ -298,8 +298,12 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          <li class="nav-item">{{request.user}}
-          </li>
+         <li class="nav-item">
+  <span class="nav-link primary" style="font-size: 16px; font-weight: 500;">
+    👤 {{ request.user.get_username|default:"Guest" }}
+  </span>
+</li>
+
           <li class="nav-item">
             <a class="nav-link" href=" {% url 'admin_dashboard' %} ">
               <i class="icon-grid menu-icon"></i>

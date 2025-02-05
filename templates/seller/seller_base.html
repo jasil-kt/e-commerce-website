@@ -23,7 +23,7 @@
 
   <style>
     .custom-row-border {
-  border: 2px solid #461f65; /* Black border */
+  border: 1px solid #461f65;
   padding: 10px;
   margin-bottom: 20px;
 }
@@ -305,8 +305,11 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          <li class="nav-item">{{request.user}}
-          </li>
+          <li class="nav-item">
+  <span class="nav-link primary" style="font-size: 16px; font-weight: 500;">
+    👤 {{ request.user.get_username|default:"Guest" }}
+  </span>
+</li>
           <li class="nav-item">
             <a class="nav-link" href=" {% static 'index.html' %} ">
               <i class="icon-grid menu-icon"></i>
@@ -328,10 +331,9 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href=" {% url 'seller_details' %} " aria-expanded="false" aria-controls="form-elements">
-              <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">seller_details</span>
-              <i class="menu-arrow"></i>
+            <a class="nav-link" href=" {% url 'product_upload' %} ">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Add product</span>
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">

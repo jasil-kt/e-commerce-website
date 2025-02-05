@@ -28,7 +28,7 @@
   </div>
 
   <div class="card-body">
-    <a class="btn btn-primary" href="#" role="button">Buy Now</a>
+    <a class="btn btn-primary" href="{% url 'cart_product' product.id %}" role="button">Buy Now</a>
       <a class="btn btn-primary" href="{% url 'delete_cart' product.id %}" role="button">Remove</a>
 
   </div>

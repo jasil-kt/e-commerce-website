@@ -35,3 +35,16 @@ class cart(models.Model):
     product_data = models.ForeignKey("product",on_delete=models.DO_NOTHING)
     customer_data = models.ForeignKey("customer",on_delete=models.DO_NOTHING)
 
+class buy_now(models.Model):
+    product = models.ForeignKey("product",on_delete=models.DO_NOTHING)
+    customer = models.ForeignKey("customer",on_delete=models.DO_NOTHING)
+    count = models.IntegerField(default=0)
+    status = models.IntegerField(default=0)
+
+class pay(models.Model):
+    buy = models.ForeignKey("buy_now",on_delete=models.DO_NOTHING)
+    card_no = models.CharField()
+    cvv = models.CharField()
+    expiry_date = models.DateField()
+
+
