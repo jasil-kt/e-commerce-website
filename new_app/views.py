@@ -1,4 +1,5 @@
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
@@ -6,10 +7,11 @@ from new_app.forms import customer, seller, seller_form, customer_form, login_fo
 
 
 # Create your views here.
+
 def index(request):
     return render(request,'index.html')
 
-
+@login_required(login_url='index')
 def dashboard(request):
     return render(request,'admin_base.html')
 
@@ -70,13 +72,13 @@ def customer_add(request):
             return redirect('customer_add')
 
     return render(request,'customer/register.html',{'customer_form':customer_form1,'login_form':login_form1 })
-
+@login_required(login_url='index')
 def admin_dashboard(request):
     return render(request,'admin/admin_base.html')
-
+@login_required(login_url='index')
 def customer_dashboard(request):
     return render(request,'customer/customer_base.html')
-
+@login_required(login_url='index')
 def seller_dashboard(request):
     return render(request,'seller/seller_base.html')
 
@@ -108,3 +110,6 @@ def login_view(request):
     return render(request,'login1.html')
 
 
+def logout_view(request):
+    logout(request)
+    return redirect('login_view')

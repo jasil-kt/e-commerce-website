@@ -13,21 +13,21 @@
         {{ message }}
     </div>
     {% endfor %}
-    {% if customer_data1 %}
+
     <div class="card mb-4">
         <div class="card-header bg-dark text-white">
             <h4 class="mb-0">Customer Details</h4>
         </div>
         <div class="card-body">
-            <p><strong>Name:</strong> {{customer_data1.name }}</p>
-            <p><strong>Email:</strong> {{product.customer.email }}</p>
-            <p><strong>Address:</strong> {{product.customer.address }}</p>
-            <p><strong>Phone Number:</strong> {{product.customer.phone_no }}</p>
+
+            <p><strong>Name:</strong> {{customer_data.name}}</p>
+            <p><strong>Email:</strong> {{customer_data.email}}</p>
+            <p><strong>Address:</strong> {{customer_data.address}}</p>
+            <p><strong>Phone Number:</strong> {{customer_data.phone_no}}</p>
+
         </div>
     </div>
-    {% else %}
-    <p class="text-warning">Customer details not found.</p>
-{% endif %}
+
 
     <!-- Order Summary Table -->
     <div class="table-responsive">
@@ -37,7 +37,7 @@
                     <th scope="col">S.NO</th>
                     <th scope="col">Name</th>
                     <th scope="col">Brand</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">Available quantity</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Price (&#8377;)</th>
                     <th scope="col">Image</th>
@@ -51,18 +51,18 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ product.product.name }}</td>
                     <td>{{ product.product.brand }}</td>
-                    <td>{{ product.customer.address }}</td>
+                    <td>{{ product.product.quantity }} </td>
                     <td>{{ product.count }}</td>
-                    <td>{{ product.product.product_price }}</td>
+                    <td>₹{{ product.total_price }}</td>
                     <td>
                         <img src="{{ product.product.product_image.url }}" alt="Product Image"
                              style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px;">
                     </td>
                     <td>
-                        {% if product.status == 0 %}
+                       {% if product.status == 0 %}
                         <a class="btn btn-success btn-sm" href="{% url 'pay_now' product.id %}" role="button">Pay Now</a>
-                        {% else %}
-                        <span class="btn btn-primary">Paid</span>
+                        {% elif product.product.quantity == 0 %}
+                        <p>Out of stock</p>
                         {% endif %}
                     </td>
                     <td>

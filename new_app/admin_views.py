@@ -1,21 +1,22 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from new_app.filters import SellerFilter
 from new_app.forms import seller_form
 from new_app.models import customer, seller, product
 
-
+@login_required(login_url='/index/')
 def customer_details(request):
     data = customer.objects.all()
 
     return render(request,"admin/cus_details.html",{"data":data})
-
+@login_required(login_url='/index/')
 def seller_details(request):
     data = seller.objects.all()
     print(data)
 
     return render(request,"admin/sell_details.html",{"data":data})
-
+@login_required(login_url='/index/')
 def delete_customer(request,id):
     data = customer.objects.get(id=id)
     data.delete()
@@ -23,7 +24,7 @@ def delete_customer(request,id):
 
     return render(request,"cus_details.html")
 
-
+@login_required(login_url='index')
 def update_customer(request,id):
     data = seller.objects.get(id=id)
     form1=seller_form(instance=data)
@@ -34,7 +35,7 @@ def update_customer(request,id):
         return redirect("seller_details")
 
     return render(request,"seller/seller_form.html",{"seller_form":form1})
-
+@login_required(login_url='index')
 def delete_seller(request,id):
     data = seller.objects.get(id=id)
     data.delete()
@@ -42,7 +43,7 @@ def delete_seller(request,id):
 
     return render(request,"sell_details.html")
 
-
+@login_required(login_url='index')
 def view_product(request):
     data = product.objects.all()
     seller_filter = SellerFilter(request.GET,queryset=data)

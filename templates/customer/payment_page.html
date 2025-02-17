@@ -7,7 +7,9 @@
     <h3>Enter Your Payment Details:</h3>
     {% csrf_token %}
     {{ form|crispy }}
+    <h4>Quantity:{{product.product.count}}</h4>
     <button type="submit" class="btn btn-primary">Pay Now</button>
 </form>
+
 
 {% endblock %}

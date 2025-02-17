@@ -30,8 +30,10 @@ urlpatterns = [
     path("cart_product/<int:id>/", customer_views.cart_product, name="cart_product"),
     path("order_summary",customer_views.order_summary,name="order_summary"),
     path("pay_now/<int:id>/",customer_views.pay_now,name="pay_now"),
-    path("delete_product/<int:id>/",customer_views.delete_product,name="delete_product")
-
+    path("delete_product/<int:id>/",customer_views.delete_product,name="delete_product"),
+    path('payment_view', customer_views.payment_view, name="payment_view"),
+    path('order', customer_views.order, name="order"),
+    path('logout_view', views.logout_view, name="logout_view"),
 
 
 ]

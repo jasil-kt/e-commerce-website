@@ -1,9 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from new_app.forms import product_form
 from new_app.models import product,seller
 
-
+@login_required(login_url='index')
 def product_upload(request):
     user_data = request.user
     seller_data = seller.objects.get(seller_data = user_data)
@@ -17,7 +18,7 @@ def product_upload(request):
     else:
         form = product_form()
     return render(request, 'seller/product_upload.html', {'form': form})
-
+@login_required(login_url='index')
 def product_details(request):
     user = request.user
     seller_data = seller.objects.get(seller_data = user)

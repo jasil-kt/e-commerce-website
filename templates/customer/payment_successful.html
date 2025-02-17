@@ -1,0 +1,26 @@
+{% extends 'customer/customer_base.html' %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-success">Payment Successful!</h2>
+        <p class="lead mt-3">Thank you for your purchase.</p>
+        <p>Your order has been processed successfully.</p>
+
+        <div class="mt-4">
+            <a href="{% url 'order' %}" class="btn btn-primary">View Orders</a>
+            <a href="{% url 'product_view' %}" class="btn btn-outline-secondary">Continue Shopping</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        max-width: 500px;
+        margin: auto;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+{% endblock %}

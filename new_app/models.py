@@ -42,7 +42,7 @@ class buy_now(models.Model):
     status = models.IntegerField(default=0)
 
 class pay(models.Model):
-    buy = models.ForeignKey("buy_now",on_delete=models.DO_NOTHING)
+    buy = models.ForeignKey("buy_now",on_delete=models.CASCADE)
     card_no = models.CharField()
     cvv = models.CharField()
     expiry_date = models.DateField()
